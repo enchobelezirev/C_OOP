@@ -1,8 +1,7 @@
 #pragma once
 
-#include <list>
+#include <vector>
 #include <string>
-
 
 using namespace std;
 struct Range{
@@ -13,14 +12,14 @@ class StringHandler
 {
 private:
 	Range range;
-	list<string> names;
+	vector<string> names;
 public:
 	StringHandler();
-	StringHandler(list<string> names);
+	StringHandler(vector<string> names);
 	~StringHandler();
 	void executeQuery(string queryString);
 	void setRange(int start, int end);
-	Range getRage();
-	list<string> getNames() const;
+	Range getRage() const;
+	vector<string> getNames() const;
 };
 

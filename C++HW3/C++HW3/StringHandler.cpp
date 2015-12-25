@@ -1,12 +1,12 @@
 #include "StringHandler.h"
-#include "QueryStringParser.h"
+#include "Parser.h"
 StringHandler::StringHandler()
 {
 	range.rangeStart = 0;
 	range.rangeEnd = 0;
 }
 
-StringHandler::StringHandler(list<string> names)
+StringHandler::StringHandler(vector<string> names)
 {
 	this->names = names;
 	range.rangeEnd = names.size() - 1;
@@ -19,8 +19,10 @@ StringHandler::~StringHandler()
 
 void StringHandler::executeQuery(string queryString)
 {
-	Query* q = QueryStringParser(queryString).parse();
+	Parser p(queryString);
+	Query* q = p.parseStringQuery();
 	q->execute(*this);
+	delete q;
 }
 
 void StringHandler::setRange(int start, int end)
@@ -29,12 +31,12 @@ void StringHandler::setRange(int start, int end)
 	this->range.rangeEnd = end;
 }
 
-Range StringHandler::getRage()
+Range StringHandler::getRage() const
 {
 	return range;
 }
 
-list<string> StringHandler::getNames() const
+vector<string> StringHandler::getNames() const
 {
 	return names;
 }

@@ -1,7 +1,5 @@
 #include "StringQuery.h"
 
-
-
 StringQuery::StringQuery()
 {
 }
@@ -19,11 +17,11 @@ StringQuery::~StringQuery()
 void StringQuery::execute(StringHandler& handler)
 {
 	int matchedWords = 0;
-	list<string> names = handler.getNames();
-	for (list<string>::iterator stringIt = names.begin(); stringIt != names.end(); stringIt++)
+	vector<string> names = handler.getNames();
+	for (size_t i = handler.getRage().rangeStart; i <= handler.getRage().rangeEnd; i++)
 	{
-		string name = *stringIt;
-		if (name.substr(0, str.size()) == str)
+		string currentName = names[i];
+		if (currentName.substr(0,str.size()) == str)
 		{
 			matchedWords++;
 		}

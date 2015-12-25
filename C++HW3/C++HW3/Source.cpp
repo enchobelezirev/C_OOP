@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
-#include <list>
-#include "StringHandler.h"
+#include "Parser.h"
 using namespace std;
 
 int main() {
@@ -11,14 +10,12 @@ int main() {
 	for (size_t i = 0; i < testTries; i++)
 	{
 		cin >> namesCount >> queriesCount;
-		list<string> names;
 		cin.ignore();
-		for (size_t j = 0; j < namesCount; j++)
-		{
-			string name;
-			getline(cin, name);
-			names.push_back(name);
-		}
+		
+		string namesLine;
+		getline(cin, namesLine);
+		Parser p(namesLine);
+		vector<string> names = p.parseNamesList();
 		StringHandler handler(names);
 		for (size_t j = 0; j < queriesCount; j++)
 		{
